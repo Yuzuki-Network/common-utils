@@ -115,7 +115,7 @@ public class BezierEasing implements IEasing {
      */
     public static class Builder {
         private double x1 = -999, y1 = -999, x2 = -999, y2 = -999;
-        private List<BezierPoint> points = new ArrayList<>();
+        private final List<BezierPoint> points = new ArrayList<>();
 
         /**
          * Set the x1 value of the cubic bezier
@@ -123,7 +123,7 @@ public class BezierEasing implements IEasing {
          * @return BezierEasing.Builder
          */
         public Builder x1(double x1) {
-            if (x1 <= 0 || x1 >= 1)
+            if (x1 < 0 || x1 > 1)
                 throw new IllegalArgumentException("x1 must be between 0 and 1");
             this.x1 = x1;
             return this;
@@ -135,7 +135,7 @@ public class BezierEasing implements IEasing {
          * @return BezierEasing.Builder
          */
         public Builder y1(double y1) {
-            if (y1 <= 0 || y1 >= 1)
+            if (y1 < 0 || y1 > 1)
                 throw new IllegalArgumentException("y1 must be between 0 and 1");
             this.y1 = y1;
             return this;
@@ -147,7 +147,7 @@ public class BezierEasing implements IEasing {
          * @return BezierEasing.Builder
          */
         public Builder x2(double x2) {
-            if (x2 <= 0 || x2 >= 1)
+            if (x2 < 0 || x2 > 1)
                 throw new IllegalArgumentException("x2 must be between 0 and 1");
             this.x2 = x2;
             return this;
@@ -159,7 +159,7 @@ public class BezierEasing implements IEasing {
          * @return BezierEasing.Builder
          */
         public Builder y2(double y2) {
-            if (y2 <= 0 || y2 >= 1)
+            if (y2 < 0 || y2 > 1)
                 throw new IllegalArgumentException("y2 must be between 0 and 1");
             this.y2 = y2;
             return this;
