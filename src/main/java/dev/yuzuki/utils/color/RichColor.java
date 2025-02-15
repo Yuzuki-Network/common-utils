@@ -30,6 +30,10 @@ import java.awt.*;
  * @see Color
  */
 public class RichColor extends Color {
+
+    /**
+     * ARGB value of the color
+     */
     int value;
 
     /**

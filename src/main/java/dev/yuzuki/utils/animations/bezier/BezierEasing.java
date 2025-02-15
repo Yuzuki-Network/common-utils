@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- *  <H1>BezierEasingBuilder</H1>
+ * BezierEasingBuilder
  * This class is used to create a custom easing function using the cubic bezier algorithm. <br>
  * Implementing with the {@link IEasing} interface. <br>
  * Usage example
