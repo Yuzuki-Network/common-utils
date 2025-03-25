@@ -1,5 +1,8 @@
 package dev.yuzuki.utils.network;
 
+/**
+ * Enum representing various HTTP status codes and their associated messages.
+ */
 public enum HttpStatus {
     HTTP_100_CONTINUE(100, "100: Continue"),
     HTTP_101_SWITCHING_PROTOCOLS(101, "101: Switching Protocols"),
@@ -66,19 +69,41 @@ public enum HttpStatus {
     private final int code;
     private final String message;
 
+    /**
+     * Constructs an HttpStatus enum with the specified code and message.
+     *
+     * @param code the HTTP status code
+     * @param message the message associated with the status code
+     */
     HttpStatus(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
+    /**
+     * Returns the HTTP status code.
+     *
+     * @return the HTTP status code
+     */
     public int getCode() {
         return code;
     }
 
+    /**
+     * Returns the message associated with the HTTP status code.
+     *
+     * @return the message associated with the HTTP status code
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * Returns the message associated with the specified HTTP status code.
+     *
+     * @param code the HTTP status code
+     * @return the message associated with the status code, or "Unknown Status" if the code is not recognized
+     */
     public static String getMessageByCode(int code) {
         for (HttpStatus status : values()) {
             if (status.code == code) {
@@ -88,10 +113,22 @@ public enum HttpStatus {
         return code + ": Unknown Status";
     }
 
+    /**
+     * Checks if the specified HTTP status code represents a successful response.
+     *
+     * @param code the HTTP status code
+     * @return true if the code represents a successful response, false otherwise
+     */
     public static boolean isSuccessful(int code) {
         return code >= 200 && code < 300;
     }
 
+    /**
+     * Checks if the specified HttpStatus represents a successful response.
+     *
+     * @param status the HttpStatus to check
+     * @return true if the status represents a successful response, false otherwise
+     */
     public static boolean isSuccessful(HttpStatus status) {
         return status.code >= 200 && status.code < 300;
     }
