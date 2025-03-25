@@ -1,7 +1,5 @@
 package dev.yuzuki.utils.animations;
 
-import java.util.function.Consumer;
-
 /**
  * Easing functions for animations
  * @see <a href="https://easings.net/">Easing functions</a>
