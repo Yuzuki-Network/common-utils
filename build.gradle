@@ -48,7 +48,7 @@ publishing {
                     developer {
                         id = "minearchive"
                         name = "Mine Archive"
-                        email = "contact@minearchive"
+                        email = "contact@minearchive.net"
                     }
                 }
 
