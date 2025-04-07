@@ -2,6 +2,12 @@ package dev.yuzuki.utils.network.response;
 
 import dev.yuzuki.utils.network.Response;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 /**
  * Represents a binary response from a network request.
  * This class extends the generic Response class with a byte array as the data type.
@@ -17,5 +23,14 @@ public class BinaryResponse extends Response<byte[]> {
      */
     public BinaryResponse(int code, long tookTime, byte[] data) {
         super(code, tookTime, data);
+    }
+
+    public boolean writeToFile(Path path, String fileName) {
+        try {
+            Files.write(new File(path.toFile(), fileName).toPath(), get());
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
     }
 }

@@ -7,6 +7,7 @@ package dev.yuzuki.utils.network;
  */
 public class Response<T> {
     private final int code;
+    private final HttpStatus httpStatus;
     private final long tookTime;
     private final T t;
 
@@ -21,6 +22,7 @@ public class Response<T> {
         this.code = code;
         this.tookTime = tookTime;
         this.t = t;
+        this.httpStatus = HttpStatus.fromCode(code);
     }
 
     /**
@@ -51,6 +53,15 @@ public class Response<T> {
     }
 
     /**
+     * Return the HTTPStatus.
+     *
+     * @return Enum of {@link HttpStatus}
+     */
+    public HttpStatus getHttpStatus() {
+        return httpStatus;
+    }
+
+    /**
      * Checks if the response is successful.
      *
      * @return true if the status code is in the range [200, 300), false otherwise
@@ -58,4 +69,5 @@ public class Response<T> {
     public boolean isSuccessful() {
         return code >= 200 && code < 300;
     }
+
 }
