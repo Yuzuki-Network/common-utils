@@ -113,6 +113,20 @@ public enum HttpStatus {
         return code + ": Unknown Status";
     }
 
+
+    /**
+     * Return HTTPStatus from the specified HTTP status code.
+     *
+     * @param code the HTTP status code
+     * @return the HTTPStatus code or HTTP_404_NOT_FOUND
+     */
+    public static HttpStatus fromCode(int code) {
+        for (HttpStatus status : values()) {
+            if (status.code == code) return  status;
+        }
+        return HTTP_404_NOT_FOUND;
+    }
+
     /**
      * Checks if the specified HTTP status code represents a successful response.
      *

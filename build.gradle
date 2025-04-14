@@ -22,7 +22,7 @@ test {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of (8))
+        languageVersion.set(JavaLanguageVersion.of(8))
     }
     withSourcesJar()
     withJavadocJar()
@@ -48,7 +48,7 @@ publishing {
                     developer {
                         id = "minearchive"
                         name = "Mine Archive"
-                        email = "contact@minearchive"
+                        email = "contact@minearchive.net"
                     }
                 }
 
