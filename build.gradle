@@ -66,8 +66,8 @@ publishing {
 sonatypeCentralUpload {
     dependsOn "jar", "sourcesJar", "javadocJar", "generatePomFileForMavenPublication"
 
-    username = System.getenv("SONATYPE_USERNAME")
-    password = System.getenv("SONATYPE_PASSWORD")
+    username = System.getenv("SONATYPE_CENTRAL_USERNAME")
+    password = System.getenv("SONATYPE_CENTRAL_PASSWORD")
 
     archives = files(
             tasks.named("jar").get(),
@@ -78,5 +78,5 @@ sonatypeCentralUpload {
     pom = tasks.named("generatePomFileForMavenPublication").get().outputs.files.singleFile
 
     signingKey = System.getenv("PGP_SIGNING_KEY")
-    signingKeyPassphrase = System.getenv("PGP_KEY_PASSPHRASE")
+    signingKeyPassphrase = System.getenv("PGP_SIGNING_KEY_PASSPHRASE")
 }
