@@ -5,7 +5,6 @@ import dev.yuzuki.utils.network.response.ImageResponse;
 import dev.yuzuki.utils.network.response.TextResponse;
 
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -22,6 +21,8 @@ public class HttpClient {
      */
     private static int TIMEOUT = 5000;
 
+    private static String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3";
+
     /**
      * Sets the timeout value for the HTTP connection.
      *
@@ -29,6 +30,10 @@ public class HttpClient {
      */
     public static void setTimeout(int timeout) {
         TIMEOUT = timeout;
+    }
+
+    public static void setUserAgent(String userAgent) {
+        USER_AGENT = userAgent;
     }
 
     /**
@@ -44,6 +49,7 @@ public class HttpClient {
             connection.setRequestMethod(request.getMethod());
             connection.setConnectTimeout(TIMEOUT);
             connection.setReadTimeout(TIMEOUT);
+            connection.setRequestProperty("User-Agent", USER_AGENT);
             request.getHeaders().forEach(connection::setRequestProperty);
             if (request.getBody() != null) {
                 connection.setDoOutput(true);
