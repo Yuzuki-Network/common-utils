@@ -1,5 +1,6 @@
 package dev.yuzuki.utils.event;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.*;
@@ -17,7 +18,7 @@ public class EventBus {
                 .forEach(m -> {
                     Class<?> paramType = m.getParameterTypes()[0];
                     methodMap.computeIfAbsent(paramType, k -> new ArrayList<>())
-                            .add(new ListenerHolder(o, m, m.getAnnotation(Listener.class).parallel()));
+                            .add(new ListenerHolder(o, m, m.getAnnotation(Listener.class).parallel() || ParallelEvent.class.isAssignableFrom(paramType)));
                 });
 
         methodMap.replaceAll((key, list) ->
@@ -37,19 +38,21 @@ public class EventBus {
         List<ListenerHolder> listeners = methodMap.get(event.getClass());
         if (listeners == null) return;
 
-        if (event instanceof ParallelEvent) {
-            service.execute(() -> listeners.forEach(holder -> {
+        listeners.forEach(listener -> {
+            listener.method.setAccessible(true);
+            Runnable task = () -> {
                 try {
-                    holder.method.invoke(holder.instance, event);
-                } catch (Exception ignored) { }
-            }));
-        } else {
-            listeners.forEach(holder -> {
-                try {
-                    holder.method.invoke(holder.instance, event);
-                } catch (Exception ignored) { }
-            });
-        }
+                    listener.method.invoke(listener.instance, event);
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    throw new RuntimeException(e);
+                }
+            };
+            if (listener.parallel) {
+                service.submit(task);
+            } else {
+                task.run();
+            }
+        });
     }
 
     public void post(Object... event) {

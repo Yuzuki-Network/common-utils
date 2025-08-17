@@ -53,8 +53,24 @@ public class Animation {
     }
 
     /**
-     * Get the current value of the animation
-     * @param easing Easing function
+     * Sets the value of the animation directly.
+     * <p>
+     * Resets startValue, tempValue, and targetValue to the specified value,
+     * and updates the animation's start time to the current time.
+     * </p>
+     * @param value The value to set
+     */
+    public void setValue(double value) {
+        this.startValue = value;
+        this.tempValue = value;
+        this.targetValue = value;
+        this.startMs = System.currentTimeMillis();
+    }
+
+    /**
+     * イージング関数を設定します。
+     * <p>
+     * アニメーションの補間に使用するイージング関数を変更します。
      */
     public void setEasing(IEasing easing) {
         this.easing = easing;
